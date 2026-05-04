@@ -1,8 +1,3 @@
-# ---------------------------------------------------------
-# SMART STUDY TUTORING SERVICES - MULTI-AGENT SYSTEM
-# ---------------------------------------------------------
-
-# Data Encapsulation: Task and Recommendation objects
 class Task:
     def __init__(self, title, data):
         self.title = title
@@ -13,7 +8,6 @@ class Recommendation:
         self.agent_name = agent_name
         self.advice = advice
 
-# Abstraction & Inheritance: Base Agent Class
 class Agent:
     def __init__(self, name):
         self.name = name
@@ -21,7 +15,6 @@ class Agent:
     def process_task(self, task):
         raise NotImplementedError("Subclasses must implement logic.")
 
-# Polymorphism: Specialized Agent Logic
 class FinanceAgent(Agent):
     def process_task(self, task):
         return Recommendation(self.name, f"Fee Analysis: ${task.data} per session.")
@@ -44,7 +37,6 @@ class Founder:
             print(f"- [{rec.agent_name}]: {rec.advice}")
         print("\nDecision: Approved. Smart Study is operational!")
 
-# System Overview Logic
 class AiAgent:
     def AI(self):
         print("\n--- SYSTEM LOGIC OVERVIEW ---")
@@ -54,34 +46,25 @@ class AiAgent:
         print("\nOperations Agent: Manages scheduling and session organization.")
         print("\nConclusion: Agents merge outputs for AI review and final data storage.")
 
-# Main Execution Flow
 def main():
     founder = Founder("Omran")
-    
-    # Initialize Agents
     finance = FinanceAgent("Finance-Bot")
     marketing = MarketingAgent("Marketing-Bot")
     operations = OperationsAgent("Ops-Bot")
-
-    # Define Tasks
     task_list = [
         (finance, Task("Course Fee", 45)),
         (marketing, Task("Social Media", "Instagram")),
         (operations, Task("Math Session", "10:00 AM"))
     ]
 
-    # Process Workflow
     final_reports = []
     for agent, task in task_list:
         report = agent.process_task(task)
         final_reports.append(report)
         print(f"Task '{task.title}' processed by {agent.name}.")
 
-    # Final Decision & Summary
     founder.review_and_decide(final_reports)
-    
     logic_summary = AiAgent()
     logic_summary.AI()
-
 if __name__ == "__main__":
     main()
